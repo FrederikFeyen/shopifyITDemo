@@ -1,0 +1,24 @@
+{
+  "name": "cypress-realworld-testing-course-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cypress-io/cypress-realworld-testing-course-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cypress-io/cypress-realworld-testing-course-app/issues"
+  },
+  "homepage": "https://github.com/cypress-io/cypress-realworld-testing-course-app#readme",
+  "devDependencies": {
+    "cypress": "^15.15.0"
+  }
+}
