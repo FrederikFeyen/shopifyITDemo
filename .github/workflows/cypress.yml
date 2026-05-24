@@ -13,6 +13,8 @@ jobs:
         with:
           # This tells the action to automatically append the --record flag
           record: true 
+          # 👈 Point directly to the spec for the Linux runner
+          spec: cypress/e2e/realbeans.cy.js
         env:
           # 1. This securely pulls the record key you saved in your GitHub settings
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
