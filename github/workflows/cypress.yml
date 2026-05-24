@@ -1,0 +1,21 @@
+name: RealBeans E2E Tests
+on: [push]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Cypress Tests and Record to Cloud
+        uses: cypress-io/github-action@v6
+        with:
+          # This tells the action to automatically append the --record flag
+          record: true 
+        env:
+          # 1. This securely pulls the record key you saved in your GitHub settings
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          
+          # 2. Don't forget your Shopify store access password for the headless runner!
+          CYPRESS_shopify_password: ${{ secrets.dotwai }}
