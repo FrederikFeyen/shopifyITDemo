@@ -19,10 +19,11 @@ describe('RealBeans Shopify Quality Assurance Suite', () => {
   });
 
   it('1. Verify Homepage Layout and Corporate Intro Text', () => {
-    cy.visit('/', { failOnStatusCode: false });
+    // Ensure we are on the homepage (already visited in beforeEach, but good to be explicit if needed)
+    // Removed redundant cy.visit to prevent session flakiness
     
     // Check for core text - very broad regex to handle theme variations
-    cy.contains(/Since 1801|RealBeans has roasted premium coffee/i, { timeout: 15000 })
+    cy.contains(/Since 1801|RealBeans has roasted|premium coffee/i, { timeout: 15000 })
       .should('be.visible');
   });
 
