@@ -69,10 +69,11 @@ describe('RealBeans Shopify Quality Assurance Suite', () => {
     cy.get(titleSelector).first().then(($initialProduct) => {
       const originalTitleText = $initialProduct.text().trim();
 
-      // Look for the sort dropdown - handle multiple common IDs/Names
+      // Look for the sort dropdown - handle multiple common IDs/Names (e.g. desktop and mobile)
       cy.get('#SortBy, [name="sort_by"], .collection-filters__sort select').then(($select) => {
         if ($select.length > 0) {
-          cy.wrap($select).select('price-ascending', { force: true });
+          // Use .first() because Shopify themes often have separate selects for mobile/desktop
+          cy.wrap($select).first().select('price-ascending', { force: true });
           
           // Wait for content update
           cy.wait(3000); 
