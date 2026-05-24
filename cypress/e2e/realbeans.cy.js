@@ -3,28 +3,30 @@ describe('RealBeans Shopify Quality Assurance Suite', () => {
 
   beforeEach(() => {
     // Navigate to the base URL configured
-    cy.visit('https://r0757870-realbeans.myshopify.com/');
+    cy.visit('/');
     
-    // Check if the current route is intercepted by Shopify's password barrier
-    cy.its('location.pathname').then((pathname) => {
-      if (pathname.includes('/password')) {
-        // Find Shopify theme password input, type the credential, and submit
+    // Log if the password is missing to help debug (it will be masked in CI)
+    if (!storePassword) {
+      cy.log('WARNING: shopify_password is not defined in Cypress.env');
+    }
+
+    // Check if the page is a Shopify password page
+    cy.get('body').then(($body) => {
+      if ($body.find('input[type="password"], #password, [name="password"]').length > 0) {
         cy.get('input[type="password"], #password, [name="password"]')
           .first()
-          .type(`${storePassword}{enter}`);
+          .type(`${storePassword}{enter}`, { log: false }); // Don't log the password
       }
     });
   });
 
   it('1. Verify Homepage Layout and Corporate Intro Text', () => {
-    cy.visit('https://r0757870-realbeans.myshopify.com/');
+    // Assert that a product grid or collection section exists on the landing view
+    cy.get('.grid, .product-grid, [class*="product-grid"]').should('exist');
     
     // Explicit check for the exact historical copy requested by the CIO
     cy.contains('Since 1801, RealBeans has roasted premium coffee in Antwerp for Europe’s finest cafes.')
       .should('be.visible');
-      
-    // Assert that a product grid or collection section exists on the landing view
-    cy.get('.grid, .product-grid, [class*="product-grid"]').should('exist');
   });
 
   it('2. Verify Custom About Page and Heritage Paragraph', () => {
