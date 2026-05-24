@@ -4,6 +4,9 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    env:
+      # Opt into Node.js 24 for all steps in this job
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -16,14 +19,11 @@ jobs:
           # 👈 Point directly to the spec for the Linux runner
           spec: cypress/e2e/realbeans.cy.js
         env:
-          # Opt into Node.js 24 as recommended by GitHub
-          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
           # 1. This securely pulls the record key you saved in your GitHub settings
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          
+
           # 2. Don't forget your Shopify store access password for the headless runner!
           CYPRESS_shopify_password: ${{ secrets.SHOPIFY_PASSWORD }}
-          
+
           # Enable debug logs if needed for troubleshooting
           # DEBUG: cypress:server:args
