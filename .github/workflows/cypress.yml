@@ -18,4 +18,4 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           
           # 2. Don't forget your Shopify store access password for the headless runner!
-          CYPRESS_shopify_password: ${{ secrets.dotwai }}
+          CYPRESS_shopify_password: ${{ secrets.SHOPIFY_PASSWORD }}
